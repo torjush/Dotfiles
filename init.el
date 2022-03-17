@@ -44,7 +44,6 @@ There are two things you can do about this warning:
   (unless (package-installed-p package)
     (package-install package)))
 
-(package-initialize)
 
 ;; Startup
 (setq inhibit-startup-message t)
@@ -75,39 +74,8 @@ There are two things you can do about this warning:
 
 ;; Org
 (global-set-key (kbd "C-c a") 'org-agenda)
-(setq org-hide-emphasis-markers t)
-(font-lock-add-keywords 'org-mode
-                        '(("^ *\\([-]\\) "
-                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
-(use-package org-bullets
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
-
-(let* ((variable-tuple
-          (cond ((x-list-fonts "ETBembo")         '(:font "ETBembo"))
-                ((x-list-fonts "Source Sans Pro") '(:font "Source Sans Pro"))
-                ((x-list-fonts "Lucida Grande")   '(:font "Lucida Grande"))
-                ((x-list-fonts "Verdana")         '(:font "Verdana"))
-                ((x-family-fonts "Sans Serif")    '(:family "Sans Serif"))
-                (nil (warn "Cannot find a Sans Serif Font.  Install Source Sans Pro."))))
-         (base-font-color     (face-foreground 'default nil 'default))
-         (headline           `(:inherit default :weight bold :foreground ,base-font-color)))
-
-    (custom-theme-set-faces
-     'user
-     `(org-level-8 ((t (,@headline ,@variable-tuple))))
-     `(org-level-7 ((t (,@headline ,@variable-tuple))))
-     `(org-level-6 ((t (,@headline ,@variable-tuple))))
-     `(org-level-5 ((t (,@headline ,@variable-tuple))))
-     `(org-level-4 ((t (,@headline ,@variable-tuple :height 1.1))))
-     `(org-level-3 ((t (,@headline ,@variable-tuple :height 1.25))))
-     `(org-level-2 ((t (,@headline ,@variable-tuple :height 1.5))))
-     `(org-level-1 ((t (,@headline ,@variable-tuple :height 1.75))))
-     `(org-document-title ((t (,@headline ,@variable-tuple :height 2.0 :underline nil))))))
-
-(add-hook 'org-mode-hook 'variable-pitch-mode)
-(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-
+(global-set-key (kbd "C-c l") 'org-store-link)
+(setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 
 ;; Helm
 (require 'helm)
@@ -123,6 +91,7 @@ There are two things you can do about this warning:
 
 ;; Projectile
 (setq projectile-keymap-prefix (kbd "s-p"))
+(projectile-mode)
 
 ;; Company mode
 (require 'cc-mode)
@@ -216,23 +185,5 @@ There are two things you can do about this warning:
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-agenda-files
-   (quote
-    ("~/Documents/org/todo_w4_2021.org" "~/Documents/org/todo.org")))
  '(package-selected-packages
-   (quote
-    (buffer-move transpose-frame org-bullets flycheck company-rtags flycheck-rtags helm-rtags projectile helm-gtags magit helm arjen-grey-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(org-document-title ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande" :height 2.0 :underline nil))))
- '(org-level-1 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande" :height 1.75))))
- '(org-level-2 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande" :height 1.5))))
- '(org-level-3 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande" :height 1.25))))
- '(org-level-4 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande" :height 1.1))))
- '(org-level-5 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande"))))
- '(org-level-6 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande"))))
- '(org-level-7 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande"))))
- '(org-level-8 ((t (:inherit default :weight bold :foreground "#bdc3ce" :font "Lucida Grande")))))
+   '(buffer-move transpose-frame org-bullets flycheck company-rtags flycheck-rtags helm-rtags projectile helm-gtags magit helm arjen-grey-theme)))
