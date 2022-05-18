@@ -61,7 +61,7 @@ There are two things you can do about this warning:
   :init (load-theme 'arjen-grey t))
 
 ;; Org
-(use-package org-mode
+(use-package org
   :config
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c l") 'org-store-link)
@@ -80,7 +80,7 @@ There are two things you can do about this warning:
 (use-package helm-config)
 
 ;; Projectile
-(use-package-projectile
+(use-package projectile
   :config
   (setq projectile-keymap-prefix (kbd "s-p"))
   :init
@@ -99,7 +99,7 @@ There are two things you can do about this warning:
   (company-quickhelp-mode))
 
 ;; multiple-cursors
-(use-package 'multiple-cursors
+(use-package multiple-cursors
   :config
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
