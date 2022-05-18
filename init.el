@@ -1,4 +1,5 @@
 (require 'package)
+;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
        (proto (if no-ssl "http" "https")))
@@ -15,12 +16,13 @@ There are two things you can do about this warning:
   (when (< emacs-major-version 24)
     ;; For important compatibility libraries like cl-lib
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
-(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+;;(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
 (package-initialize)
 
 ; fetch the list of packages available 
 (unless package-archive-contents
   (package-refresh-contents))
+(setq load-prefer-newer t)
 
 (setq package-list '(arjen-grey-theme
 		     use-package
@@ -40,18 +42,12 @@ There are two things you can do about this warning:
                      transpose-frame
                      buffer-move))
 
-(dolist (package package-list)
-  (unless (package-installed-p package)
-    (package-install package)))
-
 
 ;; Startup
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
 
 ;; Global
-(load-theme 'arjen-grey t)
-
 (delete-selection-mode 1)
 (global-linum-mode 1)
 (tool-bar-mode -1)
@@ -62,6 +58,10 @@ There are two things you can do about this warning:
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (setq-default indent-tabs-mode nil)
+(setq require-final-newline t)
+
+;; genmake
+(add-to-list 'auto-mode-alist '("\\.def\\'" . python-mode))
 
 ;; Meta key
 (setq mac-left-option-modifier 'meta)
@@ -71,41 +71,58 @@ There are two things you can do about this warning:
 (setq backup-directory-alist `(("." . "~/.backups_emacs")))
 
 ;;  PACKAGES  ;;
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+(require 'use-package)
+
+(use-package arjen-grey-theme
+  :ensure t
+  :init (load-theme 'arjen-grey t))
 
 ;; Org
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c l") 'org-store-link)
-(setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+(use-package org-mode
+  :config
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))))
 
 ;; Helm
-(require 'helm)
-(require 'helm-config)
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-
-(global-set-key (kbd "C-x b") 'helm-mini)
-(global-set-key (kbd "C-x r b") 'helm-bookmarks)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim)
+(use-package helm
+  :config
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  (global-set-key (kbd "C-x b") 'helm-mini)
+  (global-set-key (kbd "C-x r b") 'helm-bookmarks)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files))
+(use-package helm-config)
 
 ;; Projectile
-(setq projectile-keymap-prefix (kbd "s-p"))
-(projectile-mode)
+(use-package-projectile
+  :config
+  (setq projectile-keymap-prefix (kbd "s-p"))
+  :init
+  (projectile-mode))
+
+(use-package helm-projectile
+  :config (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim))
 
 ;; Company mode
-(require 'cc-mode)
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
-(company-quickhelp-mode)
-(setq company-backends (delete 'company-clang company-backends))
+(use-package cc-mode)
+(use-package company
+  :config
+  (add-hook 'after-init-hook 'global-company-mode)
+  (setq company-backends (delete 'company-clang company-backends))
+  :init
+  (company-quickhelp-mode))
 
 ;; multiple-cursors
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(use-package 'multiple-cursors
+  :config
+  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
+  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
 (use-package transpose-frame)
 
@@ -128,8 +145,6 @@ There are two things you can do about this warning:
   (setq dired-sidebar-use-term-integration t)
   (setq dired-sidebar-use-custom-font t))
 
-;;genmake
-(add-to-list 'auto-mode-alist '("\\.def\\'" . python-mode))
 
 ;;lsp
 (use-package lsp-mode
@@ -151,10 +166,13 @@ There are two things you can do about this warning:
 
 
 ;; elpy
-(elpy-enable)
-(when (require 'flycheck nil t)
+(use-package elpy
+  :config
+  (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
+  :init
+  (elpy-enable))
 
 ;; nxml
 (defun nxml-where ()
