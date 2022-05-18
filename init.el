@@ -24,25 +24,6 @@ There are two things you can do about this warning:
   (package-refresh-contents))
 (setq load-prefer-newer t)
 
-(setq package-list '(arjen-grey-theme
-		     use-package
-		     helm
-		     projectile
-		     helm-projectile
-		     magit
-		     multiple-cursors
-		     dired-sidebar
-		     vscode-icon
-		     elpy
-		     flycheck
-                     lsp-mode
-                     lsp-ui
-                     company-quickhelp
-                     org-bullets
-                     transpose-frame
-                     buffer-move))
-
-
 ;; Startup
 (setq inhibit-startup-message t)
 (setq initial-scratch-message nil)
