@@ -84,7 +84,8 @@ There are two things you can do about this warning:
   :config
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c l") 'org-store-link)
-  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))))
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
+(setq org-agenda-files '("~/Documents/org")))
 
 ;; Helm
 (use-package helm
