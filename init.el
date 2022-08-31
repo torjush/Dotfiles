@@ -65,16 +65,22 @@ There are two things you can do about this warning:
   :init (load-theme 'nord t))
 ;; Org
 (use-package org
-  :config
+  :ensure t
+  :init
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c l") 'org-store-link)
   (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
 (setq org-agenda-files '("~/Documents/org")))
 
+;; Magit
+(use-package magit
+  :ensure t
+
 ;; Helm
 (use-package helm
-  :config
-  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  :ensure t
+  :init
+  ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x r b") 'helm-bookmarks)
   (global-set-key (kbd "M-x") 'helm-M-x)
@@ -84,32 +90,40 @@ There are two things you can do about this warning:
 
 ;; Projectile
 (use-package projectile
-  :config
-  (setq projectile-keymap-prefix (kbd "s-p"))
+  :ensure t
   :init
+  (setq projectile-keymap-prefix (kbd "s-p"))
   (projectile-mode))
 
 (use-package helm-projectile
+  :ensure t
   :config (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim))
 
 ;; Company mode
-(use-package cc-mode)
+(use-package cc-mode
+  :ensure t)
 (use-package company
+  :ensure t
   :config
-  (add-hook 'after-init-hook 'global-company-mode)
   (setq company-backends (delete 'company-clang company-backends))
+  :init
+  (add-hook 'after-init-hook 'global-company-mode))
+(use-package company-quickhelp
+  :ensure t
   :init
   (company-quickhelp-mode))
 
 ;; multiple-cursors
 (use-package multiple-cursors
-  :config
+  :ensure t
+  :init
   (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
   (global-set-key (kbd "C->") 'mc/mark-next-like-this)
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
-(use-package transpose-frame)
+(use-package transpose-frame
+  :ensure t)
 
 ;; dired-sidebar
 (use-package dired-sidebar
@@ -152,11 +166,11 @@ There are two things you can do about this warning:
 
 ;; elpy
 (use-package elpy
-  :config
+  :ensure t
+  :init
   (when (require 'flycheck nil t)
   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
   (add-hook 'elpy-mode-hook 'flycheck-mode))
-  :init
   (elpy-enable))
 
 ;; nxml
