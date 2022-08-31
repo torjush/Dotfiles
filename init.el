@@ -56,11 +56,13 @@ There are two things you can do about this warning:
 (unless (package-installed-p 'use-package)
   (package-install 'use-package))
 (require 'use-package)
-
-(use-package arjen-grey-theme
+(setq use-package-verbose t)
+;; (use-package arjen-grey-theme
+;;   :ensure t
+;;   :init (load-theme 'arjen-grey t))
+(use-package nord-theme
   :ensure t
-  :init (load-theme 'arjen-grey t))
-
+  :init (load-theme 'nord t))
 ;; Org
 (use-package org
   :config
