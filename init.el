@@ -75,6 +75,7 @@ There are two things you can do about this warning:
 ;; Magit
 (use-package magit
   :ensure t
+  :init (setq-default with-editor-emacsclient-executable "emacsclient"))
 
 ;; Helm
 (use-package helm
