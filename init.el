@@ -40,7 +40,7 @@ There are two things you can do about this warning:
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
-
+(setq gc-cons-threshold 100000000)
 ;; genmake
 (add-to-list 'auto-mode-alist '("\\.def\\'" . python-mode))
 
