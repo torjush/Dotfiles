@@ -196,7 +196,7 @@ There are two things you can do about this warning:
                               (nxml-backward-up-element) ; always returns nil
                               t)
                           (error nil)))
-              (setq path (cons (xmltok-start-tag-local-name) path)))
+              (setq path (cons (xmltok-tag-local-name) path)))
             (if (called-interactively-p t)
                 (message "/%s" (mapconcat 'identity path "/"))
               (format "/%s" (mapconcat 'identity path "/")))))))
