@@ -151,9 +151,17 @@ There are two things you can do about this warning:
   :commands lsp
   :ensure t
   :config
-  (setq lsp-file-watch-ignored (add-to-list 'lsp-file-watch-ignored "[/\\\\]\\_build$")))
-(use-package lsp-ui :commands lsp-ui-mode :ensure t)
+  (setq lsp-diagnostic-package nil)
+  (setq lsp-enable-file-watchers nil))
+
+(use-package lsp-ui
+  :commands lsp-ui-mode
+  :ensure t
+  :config
+  (setq lsp-lens-enable nil)
+  (setq lsp-headerline-breadcrumb-enable nil))
 ;; (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
+
 (use-package ccls
   :ensure t
   :config
