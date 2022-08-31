@@ -87,7 +87,6 @@ There are two things you can do about this warning:
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
   (global-set-key (kbd "C-x C-f") 'helm-find-files))
-(use-package helm-config)
 
 ;; Projectile
 (use-package projectile
