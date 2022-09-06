@@ -122,6 +122,11 @@ There are two things you can do about this warning:
   (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
   (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
 
+(use-package dumb-jump
+  :ensure t
+  :init
+  (add-hook 'xref-backend-functions 'dumb-jump-xref-activate))
+
 (use-package transpose-frame
   :ensure t)
 
