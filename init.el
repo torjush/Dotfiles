@@ -97,7 +97,7 @@ There are two things you can do about this warning:
 
 (use-package helm-projectile
   :ensure t
-  :config (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim))
+  :init (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim))
 
 ;; Company mode
 (use-package cc-mode
