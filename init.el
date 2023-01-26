@@ -57,6 +57,16 @@ There are two things you can do about this warning:
   (package-install 'use-package))
 (require 'use-package)
 (setq use-package-verbose t)
+
+;; Theme
+(use-package tree-sitter
+  :ensure t
+  :init
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+  )
+(use-package tree-sitter-langs
+  :ensure t)
 ;; (use-package arjen-grey-theme
 ;;   :ensure t
 ;;   :init (load-theme 'arjen-grey t))
