@@ -223,6 +223,14 @@ There are two things you can do about this warning:
             (if (called-interactively-p t)
                 (message "/%s" (mapconcat 'identity path "/"))
               (format "/%s" (mapconcat 'identity path "/")))))))
+;; Edit functions
+(defun select-line (arg)
+  (interactive "p")
+  (when (not (use-region-p))
+    (forward-line 0)
+    (set-mark-command nil))
+  (forward-line arg))
+(global-set-key "\C-l" 'select-line)
 
 ;;  Languages  ;;
 ;; c
