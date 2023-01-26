@@ -133,11 +133,13 @@ There are two things you can do about this warning:
 ;; multiple-cursors
 (use-package multiple-cursors
   :ensure t
-  :init
-  (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this))
+  :bind
+  (("C-S-c C-S-c" . mc/edit-lines)
+   ("C->" . mc/mark-next-like-this)
+   ("C-<" . mc/mark-previous-like-this)
+   ("C-c C-<" . mc/mark-all-like-this)
+   ("C-c DEL" . mc/skip-to-next-like-this)
+   ("s-mouse-1" . mc/add-cursor-on-click)))
 
 (use-package dumb-jump
   :ensure t
