@@ -96,7 +96,11 @@ There are two things you can do about this warning:
   (global-set-key (kbd "C-x r b") 'helm-bookmarks)
   (global-set-key (kbd "M-x") 'helm-M-x)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files))
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+  (global-set-key (kbd "C-c g") (lambda ()
+                                  (interactive)
+                                  (let ((current-prefix-arg 1))
+                                    (call-interactively 'helm-grep-do-git-grep)))))
 
 ;; Projectile
 (use-package projectile
@@ -107,7 +111,10 @@ There are two things you can do about this warning:
 
 (use-package helm-projectile
   :ensure t
-  :init (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file-dwim))
+  :init (global-set-key (kbd "C-x C-x") 'helm-projectile-find-file))
+
+(use-package helm-xref
+  :ensure t)
 
 ;; Company mode
 (use-package cc-mode
