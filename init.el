@@ -171,32 +171,17 @@ There are two things you can do about this warning:
   ;; (setq dired-sidebar-use-custom-font t))
 
 
-;; ;;lsp
-;; (use-package lsp-mode
-;;   :commands lsp
-;;   :ensure t
-;;   :config
-;;   (setq lsp-diagnostic-package nil)
-;;   (setq lsp-enable-file-watchers nil))
+;; lsp
+(use-package lsp-mode
+  :commands lsp
+  :ensure t
+  :config
+  (setq lsp-clangd-binary-path "/usr/bin/clangd")
+  :hook ((c-mode c++-mode objc-mode) .
+         (lambda () (lsp))))
 
-;; (use-package lsp-ui
-;;   :commands lsp-ui-mode
-;;   :ensure t
-;;   :config
-;;   (setq lsp-lens-enable nil)
-;;   (setq lsp-headerline-breadcrumb-enable nil))
-;; ;; (setq company-transformers nil company-lsp-async t company-lsp-cache-candidates nil)
-
-;; (use-package ccls
-;;   :ensure t
-;;   :config
-;;   (setq ccls-executable "ccls")
-;;   (setq ccls-args '("--log-file=/tmp/ccls-log.txt"))
-;;   ;; (setq lsp-prefer-flymake nil)
-;;   ;; (setq-default flycheck-disabled-checkers '(c/c++-clang c/c++-cppcheck c/c++-gcc))
-;;   :hook ((c-mode c++-mode objc-mode) .
-;;          (lambda () (require 'ccls) (lsp))))
-
+(use-package helm-lsp
+  :ensure t)
 
 ;; elpy
 (use-package elpy
