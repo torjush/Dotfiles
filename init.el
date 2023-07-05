@@ -130,8 +130,6 @@ There are two things you can do about this warning:
   :ensure t)
 (use-package company
   :ensure t
-  :config
-  (setq company-backends (delete 'company-clang company-backends))
   :init
   (add-hook 'after-init-hook 'global-company-mode))
 (use-package company-quickhelp
