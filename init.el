@@ -148,11 +148,6 @@ There are two things you can do about this warning:
    ("C-c DEL" . mc/skip-to-next-like-this)
    ("s-<mouse-1>" . mc/add-cursor-on-click)))
 
-(use-package dumb-jump
-  :ensure t
-  :init
-  (add-hook 'xref-backend-functions 'dumb-jump-xref-activate))
-
 (use-package transpose-frame
   :ensure t)
 
