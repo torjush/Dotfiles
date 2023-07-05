@@ -61,6 +61,11 @@ There are two things you can do about this warning:
   :config
   (setq reb-re-syntax 'string))
 
+(use-package move-text
+  :ensure t
+  :bind (("M-<up>" . move-text-up)
+         ("M-<down>" . move-text-down)))
+
 ;; Theme
 (use-package tree-sitter
   :ensure t
