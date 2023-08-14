@@ -146,7 +146,7 @@ There are two things you can do about this warning:
    ("C->" . mc/mark-next-like-this)
    ("C-<" . mc/mark-previous-like-this)
    ("C-c C-a" . mc/mark-all-like-this)
-   ("C-c DEL" . mc/skip-to-next-like-this)
+   ("C-c C-d" . mc/skip-to-next-like-this)
    ("s-<mouse-1>" . mc/add-cursor-on-click)))
 
 (use-package transpose-frame
