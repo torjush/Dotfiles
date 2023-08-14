@@ -178,6 +178,11 @@ There are two things you can do about this warning:
   :ensure t
   :config
   (setq lsp-clangd-binary-path "/usr/bin/clangd")
+  (lsp-register-client
+   (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
+                    :major-modes '(c-mode c++-mode)
+                    :remote? t
+                    :server-id 'clangd-remote))
   :hook ((c-mode c++-mode objc-mode) .
          (lambda () (lsp))))
 
@@ -248,4 +253,10 @@ There are two things you can do about this warning:
  ;; If there is more than one, they won't work right.
  '(org-export-backends '(ascii html icalendar latex md odt))
  '(package-selected-packages
-   '(tree-sitter-langs tree-sitter helm-xref dumb-jump buffer-move transpose-frame org-bullets flycheck company-rtags flycheck-rtags helm-rtags projectile helm-gtags magit helm arjen-grey-theme)))
+   '(lsp-mode move-text tree-sitter-langs tree-sitter helm-xref dumb-jump buffer-move transpose-frame org-bullets flycheck company-rtags flycheck-rtags helm-rtags projectile helm-gtags magit helm arjen-grey-theme)))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
