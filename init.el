@@ -87,8 +87,9 @@ There are two things you can do about this warning:
   :init
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c l") 'org-store-link)
-  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE")))
-(setq org-agenda-files (directory-files-recursively "~/Documents/org/" "\\.org$")))
+  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))
+        org-agenda-files (directory-files-recursively "~/Documents/org/todos/by_theme" "\\.org$")
+        org-log-done 'time))
 
 ;; Magit
 (use-package magit
