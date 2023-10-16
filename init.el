@@ -63,8 +63,8 @@ There are two things you can do about this warning:
 
 (use-package move-text
   :ensure t
-  :bind (("M-<up>" . move-text-up)
-         ("M-<down>" . move-text-down)))
+  :bind (("M-p" . move-text-up)
+         ("M-n" . move-text-down)))
 
 ;; Theme
 (use-package tree-sitter
