@@ -30,7 +30,7 @@ There are two things you can do about this warning:
 
 ;; Global
 (delete-selection-mode 1)
-(global-linum-mode 1)
+(display-line-numbers-mode 1)
 (tool-bar-mode -1)
 (setq column-number-mode t)
 (setq show-trailing-whitespace t)
