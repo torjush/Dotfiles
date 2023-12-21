@@ -189,6 +189,12 @@ There are two things you can do about this warning:
 (use-package helm-lsp
   :ensure t)
 
+(use-package yasnippet
+  :ensure
+  :config
+  (yas-reload-all)
+  (add-hook 'prog-mode-hook 'yas-minor-mode))
+
 ;; elpy
 (use-package elpy
   :ensure t
