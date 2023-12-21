@@ -82,14 +82,14 @@ There are two things you can do about this warning:
   :ensure t
   :init (load-theme 'nord t))
 ;; Org
-(use-package org
-  :ensure t
-  :init
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c l") 'org-store-link)
-  (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))
-        org-agenda-files (directory-files-recursively "~/Documents/org/todos/by_theme" "\\.org$")
-        org-log-done 'time))
+;; (use-package org
+;;   :ensure t
+;;   :init
+;;   (global-set-key (kbd "C-c a") 'org-agenda)
+;;   (global-set-key (kbd "C-c l") 'org-store-link)
+;;   (setq org-todo-keywords '((sequence "TODO" "IN-PROGRESS" "WAITING" "DONE"))
+;;         org-agenda-files (directory-files-recursively "~/Documents/org/todos/by_theme" "\\.org$")
+;;         org-log-done 'time))
 
 ;; Magit
 (use-package magit
