@@ -30,8 +30,6 @@ There are two things you can do about this warning:
 (setq column-number-mode t)
 (setq show-trailing-whitespace t)
 (electric-pair-mode t)
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
 (setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
 (setq gc-cons-threshold (* 100 1024 1024))
