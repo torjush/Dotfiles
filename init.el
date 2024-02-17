@@ -25,7 +25,6 @@ There are two things you can do about this warning:
 
 ;; Global
 (delete-selection-mode 1)
-(display-line-numbers-mode 1)
 (tool-bar-mode -1)
 (setq column-number-mode t)
 (setq show-trailing-whitespace t)
@@ -74,6 +73,14 @@ There are two things you can do about this warning:
 (use-package nord-theme
   :ensure t
   :init (load-theme 'nord t))
+
+(use-package display-line-numbers
+  :ensure t
+  :init
+  (setq-default display-line-numbers 'relative) ;; or 'visual or 'absolute
+  :hook
+  (prog-mode . display-line-numbers-mode))
+
 ;; Org
 ;; (use-package org
 ;;   :ensure t
