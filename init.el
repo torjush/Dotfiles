@@ -178,6 +178,7 @@ There are two things you can do about this warning:
   :ensure t
   :config
   (setq lsp-clangd-binary-path "/usr/bin/clangd")
+  (setq lsp-clients-clangd-args '("--header-insertion=never"))
   (lsp-register-client
    (make-lsp-client :new-connection (lsp-tramp-connection "clangd")
                     :major-modes '(c-mode c++-mode)
