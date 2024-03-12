@@ -33,12 +33,18 @@ There are two things you can do about this warning:
 (setq require-final-newline t)
 (setq gc-cons-threshold (* 100 1024 1024))
 (setq read-process-output-max (* 1024 1024))
+
 ;; genmake
 (add-to-list 'auto-mode-alist '("\\.def\\'" . python-mode))
 
 ;; Meta key
 (setq mac-left-option-modifier 'meta)
 (setq mac-right-option-modifier 'none)
+
+;; Terminal emacs
+(unless (display-graphic-p)
+  (setq xterm-extra-capabilities "check")
+  (xterm-mouse-mode))
 
 ;; Redirect backups
 (setq backup-directory-alist `(("." . "~/.backups_emacs")))
