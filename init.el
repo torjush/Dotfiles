@@ -29,7 +29,6 @@ There are two things you can do about this warning:
 (setq column-number-mode t)
 (setq show-trailing-whitespace t)
 (electric-pair-mode t)
-(setq-default indent-tabs-mode nil)
 (setq require-final-newline t)
 (setq gc-cons-threshold (* 100 1024 1024))
 (setq read-process-output-max (* 1024 1024))
