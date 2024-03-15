@@ -251,14 +251,6 @@ There are two things you can do about this warning:
   (forward-line arg))
 (global-set-key "\C-l" 'select-line)
 
-;; Function list
-(let ((primitives-list '()))
-     (mapatoms
-      (lambda (sym)
-        (if (subrp (symbol-function sym))
-           (push sym primitives-list))))
-     primitives-list)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
