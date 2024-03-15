@@ -63,18 +63,16 @@ There are two things you can do about this warning:
   :bind (("M-p" . move-text-up)
          ("M-n" . move-text-down)))
 
-;; Theme
+;; Appearance
 (use-package tree-sitter
   :ensure t
   :init
   (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-  )
+  :hook
+  (tree-sitter-after-on . tree-sitter-hl-mode))
 (use-package tree-sitter-langs
   :ensure t)
-;; (use-package arjen-grey-theme
-;;   :ensure t
-;;   :init (load-theme 'arjen-grey t))
+
 (use-package nord-theme
   :ensure t
   :init (load-theme 'nord t))
