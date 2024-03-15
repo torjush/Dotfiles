@@ -224,24 +224,6 @@ There are two things you can do about this warning:
   :config
   (setq nxml-slash-auto-complete-flag t))
 
-;; (defun nxml-where ()
-;;   "Display the hierarchy of XML elements the point is on as a path."
-;;   (interactive)
-;;   (let ((path nil))
-;;     (save-excursion
-;;       (save-restriction
-;;         (widen)
-;;         (while (and (< (point-min) (point)) ;; Doesn't error if point is at beginning of buffer
-;;                     (condition-case nil
-;;                         (progn
-;;                           (nxml-backward-up-element) ; always returns nil
-;;                           t)
-;;                       (error nil)))
-;;           (setq path (cons (xmltok-tag-local-name) path)))
-;;         (if (called-interactively-p t)
-;;             (message "/%s" (mapconcat 'identity path "/"))
-;;           (format "/%s" (mapconcat 'identity path "/")))))))
-
 ;; Edit functions
 (defun select-line (arg)
   (interactive "p")
