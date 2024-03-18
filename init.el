@@ -102,18 +102,16 @@ There are two things you can do about this warning:
 ;; Helm
 (use-package helm
   :ensure t
-  :init
-  ;; (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
-  (global-set-key (kbd "C-x b") 'helm-mini)
-  (global-set-key (kbd "C-x r b") 'helm-bookmarks)
-  (global-set-key (kbd "M-x") 'helm-M-x)
-  (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-x C-f") 'helm-find-files)
-  (global-set-key (kbd "C-c g") (lambda ()
-                                  (interactive)
-                                  (let ((current-prefix-arg 1))
-                                    (call-interactively 'helm-grep-do-git-grep)))))
-
+  :bind
+  (("C-x b" . 'helm-mini)
+   ("C-x r b" . 'helm-bookmarks)
+   ("M-x" . 'helm-M-x)
+   ("M-y" . 'helm-show-kill-ring)
+   ("C-x C-f" . 'helm-find-files)
+   ("C-c g" . (lambda ()
+                (interactive)
+                (let ((current-prefix-arg 1))
+                  (call-interactively 'helm-grep-do-git-grep))))))
 ;; Projectile
 (use-package projectile
   :ensure t
