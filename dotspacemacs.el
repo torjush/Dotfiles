@@ -52,7 +52,7 @@ This function should only modify configuration layer settings."
      (lsp :variables lsp-pylsp-plugins-flake8-max-line-length 120)
      ;; markdown
      multiple-cursors
-     ;; org
+     org
      (python :variables
              python-backend 'lsp
              python-formatter 'black)
