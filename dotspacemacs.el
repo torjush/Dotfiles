@@ -49,7 +49,9 @@ This function should only modify configuration layer settings."
      (llm-client :variables
                  llm-client-enable-gptel t
                  gptel-model "o1-mini")
-     (lsp :variables lsp-pylsp-plugins-flake8-max-line-length 120)
+     (lsp :variables
+          lsp-pylsp-plugins-flake8-max-line-length 120
+          lsp-enable-indentation nil)
      ;; markdown
      multiple-cursors
      org
