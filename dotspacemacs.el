@@ -48,11 +48,7 @@ This function should only modify configuration layer settings."
      helm
      (llm-client :variables
                  llm-client-enable-gptel t
-                 gptel-model 'gemma3:27b
-                 gptel-backend (gptel-make-ollama "Ollama"
-                                 :host "localhost:11434"
-                                 :stream t
-                                 :models '(gemma3:27b)))
+                 gptel-model 'gemma3:27b)
      (lsp :variables
           lsp-pylsp-plugins-flake8-max-line-length 120
           lsp-enable-indentation nil)
@@ -607,7 +603,11 @@ before packages are loaded."
   (setq mac-option-modifier 'meta)
   (setq mac-right-option-modifier nil)
   (setq auto-revert-remote-files t)
-  (setq python-shell-virtualenv-root (expand-file-name ".venv" (projectile-project-root))))
+  (setq python-shell-virtualenv-root (expand-file-name ".venv" (projectile-project-root)))
+  (setq gptel-backend (gptel-make-ollama "Ollama"
+                        :host "localhost:11434"
+                        :stream t
+                        :models '(gemma3:27b))))
 
 
 ;; Do not write anything past this comment. This is where Emacs will
