@@ -599,7 +599,10 @@ configuration.
 Put your configuration code here, except for variables that should be set
 before packages are loaded."
   (setq tramp-default-method "ssh")
-  (setq tramp-verbose 1)
+  (setq tramp-ssh-controlmaster-options (concat
+                                         "-o ControlPath=/tmp/ssh-ControlPath-%%r@%%h:%%p "
+                                         "-o ControlMaster=auto -o ControlPersist=yes"))
+  (setq tramp-auto-save-directory "~/.emacs.d/backups")
   (setq mac-option-modifier 'meta)
   (setq mac-right-option-modifier nil)
   (setq auto-revert-remote-files t)
